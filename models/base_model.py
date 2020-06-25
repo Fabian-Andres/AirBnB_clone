@@ -6,10 +6,19 @@ import datetime
 
 class BaseModel:
 
-    def __init__(self):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    pass
+                elif key == "updated_at" or key == "created_at":
+                    setattr(self, key, datetime.datetime.fromisoformat(value))
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
 
     def __str__(self):
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
@@ -18,7 +27,7 @@ class BaseModel:
         self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
-        
+
         dictionary = {}
 
         dictionary["__class__"] = self.__class__.__name__
@@ -30,5 +39,5 @@ class BaseModel:
                 dictionary[key] = self.created_at.isoformat()
             else:
                 dictionary[key] = value
-    
+
         return dictionary
