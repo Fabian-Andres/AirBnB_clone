@@ -30,7 +30,6 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-
         dictionary = {}
 
         dictionary["__class__"] = self.__class__.__name__
