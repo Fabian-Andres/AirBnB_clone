@@ -41,5 +41,8 @@ class BaseModel:
                 dictionary[key] = self.created_at.isoformat()
             else:
                 dictionary[key] = value
-
         return dictionary
+
+    def update(self, name, value):
+        setattr(self, name, value)
+        self.save()

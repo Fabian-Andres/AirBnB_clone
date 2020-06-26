@@ -21,7 +21,6 @@ class FileStorage:
             for key, value in type(self).__objects.items():
                 dict_obj[key] = value.to_dict()
             json.dump(dict_obj, f)
-            print(FileStorage.__objects)
 
     def reload(self):
         from models.base_model import BaseModel
@@ -31,6 +30,24 @@ class FileStorage:
                 for key, value in dict_obj.items():
                     obj = BaseModel(**value)
                     type(self).__objects[key] = obj
-            print(type(self).__objects)
         except:
             pass
+
+    def find(self, id):
+        for key, value in type(self).__objects.items():
+            if id == key.split(".")[1]:
+                return value
+        return None
+
+    def delete(self, id):
+        for key in type(self).__objects.keys():
+            if id == key.split(".")[1]:
+                break
+        del type(self).__objects[key]
+
+    def print_all(self, type_class=None):
+        for key, value in type(self).__objects.items():
+            if type_class == key.split(".")[0]:
+                print(value)
+            elif type_class == None:
+                print(value)
