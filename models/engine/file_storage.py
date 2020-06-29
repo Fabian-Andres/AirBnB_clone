@@ -30,10 +30,7 @@ class FileStorage:
             with open(type(self).__file_path, 'r', encoding="utf-8") as f:
                 dict_obj = json.load(f)
                 for key, value in dict_obj.items():
-                    if key.split(".")[0] == type(self).c[0]:
-                        obj = BaseModel(**value)
-                    elif key.split(".")[0] == type(self).c[1]:
-                        obj = User(**value)
+                    obj = eval(value['__class__'])(**value)
                     type(self).__objects[key] = obj
         except ValueError:
             pass
