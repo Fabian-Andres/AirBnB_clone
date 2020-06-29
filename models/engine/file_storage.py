@@ -7,6 +7,7 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
+    c = ("BaseModel", "User")
 
     def all(self):
         return type(self).__objects
@@ -24,13 +25,17 @@ class FileStorage:
 
     def reload(self):
         from models.base_model import BaseModel
+        from models.user import User
         try:
             with open(type(self).__file_path, 'r', encoding="utf-8") as f:
                 dict_obj = json.load(f)
                 for key, value in dict_obj.items():
-                    obj = BaseModel(**value)
+                    if key.split(".")[0] == type(self).c[0]:
+                        obj = BaseModel(**value)
+                    elif key.split(".")[0] == type(self).c[1]:
+                        obj = User(**value)
                     type(self).__objects[key] = obj
-        except:
+        except ValueError:
             pass
 
     def find(self, id):
