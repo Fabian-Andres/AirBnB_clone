@@ -145,6 +145,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 storage.find(data[1], data[0]).update(data[2], data[3])
 
+    def do_count(self, class_name):
+        print(storage.count_list(class_name))
+
     def default(self, line):
         data = line.split(".")
         try:
