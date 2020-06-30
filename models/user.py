@@ -4,7 +4,13 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    
+    """[User]
+        Class inherit from BaseModel:
+    Args:
+        BaseModel ([class]):
+        [BaseModel defines all common attributes/methods for other classes]
+    """
+
     email = ""
     password = ""
     first_name = ""

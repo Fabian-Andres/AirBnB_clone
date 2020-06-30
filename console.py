@@ -12,6 +12,11 @@ import shlex
 
 
 class HBNBCommand(cmd.Cmd):
+    """[HBNBCommand]
+       The console contains the entry point of the command interpreter
+    Args:
+        cmd: [input from command line]
+    """
 
     prompt = "(hbnb) "
     c = ("BaseModel", "User", "Place", "City", "Amenity", "Review", "State")
