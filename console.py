@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
         elif data[0] in type(self).c:
             if len(data) < 2:
                 print("** instance id missing **")
-            elif storage.find(data[1]) == None:
+            elif storage.find(data[1]) is None:
                 print("** no instance found **")
             else:
                 print(storage.find(data[1]))
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         elif data[0] in type(self).c:
             if len(data) < 2:
                 print("** instance id missing **")
-            elif storage.find(data[1]) == None:
+            elif storage.find(data[1]) is None:
                 print("** no instance found **")
             else:
                 storage.delete(data[1])
@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(data) < 2:
             print("** instance id missing **")
-        elif storage.find(data[1]) == None:
+        elif storage.find(data[1]) is None:
             print("** no instance found **")
         elif len(data) < 3:
             print("** attribute name missing **")
