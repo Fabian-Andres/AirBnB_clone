@@ -44,7 +44,7 @@ class FileStorage:
                 for key, value in dict_obj.items():
                     obj = eval(value['__class__'])(**value)
                     type(self).__objects[key] = obj
-        except ValueError:
+        except:
             pass
 
     def find(self, id):
