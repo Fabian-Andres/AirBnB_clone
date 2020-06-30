@@ -145,6 +145,15 @@ class HBNBCommand(cmd.Cmd):
             else:
                 storage.find(data[1], data[0]).update(data[2], data[3])
 
+    def default(self, line):
+        data = line.split(".")
+        try:
+            if data[0] in type(self).c:
+                func = getattr(type(self), "do_" + str(data[1][:-2]))
+                func(self, data[0])
+        except:
+            pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
