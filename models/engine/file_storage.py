@@ -68,3 +68,11 @@ class FileStorage:
                 print(value)
             elif type_class is None:
                 print(value)
+
+    def count_list(self, class_name):
+        """ Function count items """
+        count = 0
+        for key, value in type(self).__objects.items():
+            if class_name == key.split(".")[0]:
+                count += 1
+        return count
