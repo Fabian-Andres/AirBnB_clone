@@ -4,6 +4,9 @@ import json
 
 
 class FileStorage:
+    """[FileStorage]
+        Save the information for the aplication in a JSON file
+    """
 
     __file_path = "file.json"
     __objects = {}
@@ -56,5 +59,5 @@ class FileStorage:
         for key, value in type(self).__objects.items():
             if type_class == key.split(".")[0]:
                 print(value)
-            elif type_class == None:
+            elif type_class is None:
                 print(value)

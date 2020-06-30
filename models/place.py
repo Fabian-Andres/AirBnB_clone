@@ -4,7 +4,13 @@ from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    
+    """[Place]
+        Class inherit from BaseModel:
+    Args:
+        BaseModel ([class]):
+        [BaseModel defines all common attributes/methods for other classes]
+    """
+
     city_id = ""
     user_id = ""
     name = ""
