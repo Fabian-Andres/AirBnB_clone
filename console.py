@@ -21,6 +21,10 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     c = ("BaseModel", "User", "Place", "City", "Amenity", "Review", "State")
 
+    def emptyline(self):
+        """Emtyline function"""
+        return
+
     def do_quit(self, *args):
         """Quit command to exit the program
         """
@@ -125,9 +129,17 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
         else:
             if type(self).isfloat(data[3]):
-                num = float(data[3])
-                if self.isint(data[3]):
-                    num = int(data[3])
+                num = data[3]
+                if "." in data[3]:
+                    try:
+                        num = float(data[3])
+                    except:
+                        pass
+                else:
+                    try:
+                        num = int(data[3])
+                    except:
+                        pass
                 storage.find(data[1]).update(data[2], num)
             else:
                 storage.find(data[1]).update(data[2], data[3])
