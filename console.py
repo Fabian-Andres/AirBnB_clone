@@ -25,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
         """Emtyline function"""
         return
 
-    def do_quit(self, *args):
+    def do_quit(self, line):
         """Quit command to exit the program
         """
         return True
