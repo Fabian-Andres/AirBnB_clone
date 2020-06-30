@@ -47,10 +47,10 @@ class FileStorage:
         except:
             pass
 
-    def find(self, id):
+    def find(self, id, class_name):
         """aux function to find a object"""
         for key, value in type(self).__objects.items():
-            if id == key.split(".")[1]:
+            if id == key.split(".")[1] and class_name == key.split(".")[0]:
                 return value
         return None
 
