@@ -146,14 +146,26 @@ class HBNBCommand(cmd.Cmd):
                 storage.find(data[1], data[0]).update(data[2], data[3])
 
     def do_count(self, class_name):
+        """ retrieve the number of instances of a class """
         print(storage.count_list(class_name))
 
     def default(self, line):
+        """ Default function """
         data = line.split(".")
+        a = data[1].replace(")", "")
+        values = a.split("(")
+
+        if values[len(values) - 1] == "":
+            del values[len(values) - 1]
         try:
             if data[0] in type(self).c:
-                func = getattr(type(self), "do_" + str(data[1][:-2]))
-                func(self, data[0])
+                func = getattr(type(self), "do_" + str(values[0]))
+                if (len(values) > 1):
+                    f_line = str(data[0]) + " " + str(values[1])
+                    f_line = f_line.replace('"', '')
+                else:
+                    f_line = data[0]
+                func(self, f_line)
         except:
             pass
 
