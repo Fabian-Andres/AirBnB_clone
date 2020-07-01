@@ -10,6 +10,7 @@ from models.state import State
 from models.review import Review
 from models import storage
 import shlex
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -152,21 +153,39 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """ Default function """
         data = line.split(".")
-        a = data[1].replace(")", "")
-        values = a.split("(")
+        class_name = data[0]
+        func_arg = data[1]
+        aux = func_arg.replace(")", "")
+        values = aux.split("(")
+        name_func = values[0]
+        args = values[1]
 
         if values[len(values) - 1] == "":
             del values[len(values) - 1]
+
         try:
-            if data[0] in type(self).c:
-                func = getattr(type(self), "do_" + str(values[0]))
-                f_line = str(data[0])
+            if class_name in type(self).c:
+                """ get name of the function"""
+                func = getattr(type(self), "do_" + str(name_func))
+                f_line = str(class_name)
                 if len(values) > 1:
-                    values2 = values[1].split(",")
-                    if len(values2) != 0:
-                        values2[0] = values2[0].replace('"', '')
-                    for i in range(0, len(values2)):
-                        f_line += " " + str(values2[i])
+                    list_args = args.split(",", 1)
+                    try:
+                        """ check if update + dictionary """
+                        dict_args = list_args[1].replace("'", "\"")
+                        dict_args = json.loads(dict_args)
+                        f_line += " " + str(list_args[0])
+                        for key, value in dict_args.items():
+                            f_line_aux = f_line
+                            f_line_aux += " " + str(key) + " " + str(value)
+                            func(self, f_line_aux)
+                        return
+                    except:
+                        pass
+                    if len(list_args) != 0:
+                        list_args[0] = list_args[0].replace('"', '')
+                    for i in range(0, len(list_args)):
+                        f_line += " " + str(list_args[i])
                 func(self, f_line)
         except:
             pass
