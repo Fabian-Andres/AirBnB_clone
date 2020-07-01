@@ -54,3 +54,20 @@ class TestBase(unittest.TestCase):
         self.assertEqual(my_dict["age"], 26)
         self.assertTrue(str(type(my_dict["name"])) == "<class 'str'>")
         self.assertEqual(my_dict["name"], "Manuel")
+
+    def test_dict_to_obj(self):
+        """Test for create an instance with a
+        dictionary representation"""
+        obj = BaseModel()
+        obj.name = "Manuel"
+        obj.awesome = 100
+        my_dict = obj.to_dict()
+
+        new_obj = BaseModel(**my_dict)
+        self.assertFalse(obj is new_obj)
+        self.assertEqual(obj.id, new_obj.id)
+        self.assertEqual(obj.updated_at, new_obj.updated_at)
+        self.assertEqual(obj.name, new_obj.name)
+        self.assertEqual(obj.created_at, new_obj.created_at)
+        self.assertEqual(obj.awesome, new_obj.awesome)
+        self.assertEqual(type(obj), type(new_obj))
