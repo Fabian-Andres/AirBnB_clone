@@ -160,11 +160,13 @@ class HBNBCommand(cmd.Cmd):
         try:
             if data[0] in type(self).c:
                 func = getattr(type(self), "do_" + str(values[0]))
-                if (len(values) > 1):
-                    f_line = str(data[0]) + " " + str(values[1])
-                    f_line = f_line.replace('"', '')
-                else:
-                    f_line = data[0]
+                f_line = str(data[0])
+                if len(values) > 1:
+                    values2 = values[1].split(",")
+                    if len(values2) != 0:
+                        values2[0] = values2[0].replace('"', '')
+                    for i in range(0, len(values2)):
+                        f_line += " " + str(values2[i])
                 func(self, f_line)
         except:
             pass
