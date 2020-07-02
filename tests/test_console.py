@@ -21,3 +21,9 @@ class TestConsole(unittest.TestCase):
         """ call the commands"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help show")
+
+    def test_empty_line(self):
+        """ empty line + ENTER shouldn’t execute anything """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("\n")
+        self.assertTrue(f.getvalue() == "")
