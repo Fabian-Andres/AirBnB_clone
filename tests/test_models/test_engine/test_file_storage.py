@@ -2,15 +2,22 @@
 
 """tests!"""
 import unittest
-import pep8
+from models.engine.file_storage import FileStorage
+from models import storage
+from models.base_model import BaseModel
 
 
 class TestBase(unittest.TestCase):
     """Unittest"""
 
-    def test_pep8_conformance(self):
-        """test pep8"""
-        pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/amenity.py'])
-        self.assertEqual(
-            result.total_errors, 0, "Found code style errors (and warnings).")
+    def test_all(self):
+        """Test for all method"""
+        all = storage.all()
+        self.assertEqual(str(type(all)), "<class 'dict'>")
+
+    def test_new(self):
+        obj = BaseModel()
+        storage.new(obj)
+        self.assertTrue(("BaseModel" + "." + str(obj.id)) in storage.all())
+        self.assertTrue(
+            storage.all()[("BaseModel" + "." + str(obj.id))] == obj)
