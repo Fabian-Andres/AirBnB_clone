@@ -18,5 +18,6 @@ class TestConsole(unittest.TestCase):
         ), "Prints the string representation of an\n\
         instance based on the class name and id\n")
 
+        """ call the commands"""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help show")
