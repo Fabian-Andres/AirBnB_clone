@@ -1,6 +1,6 @@
 # AirBnB clone project
 
-This is a clone project for [Airbnb](https://https://www.airbnb.com/ "Airbnb"). website 
+This is a clone project for [Airbnb](https://www.airbnb.com/ "Airbnb") website 
 
 ### System requirements
 
