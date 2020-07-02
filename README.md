@@ -1,6 +1,6 @@
 # AirBnB clone project
 
-
+This is a clone project for Airbnb 
 
 ### System requirements
 
