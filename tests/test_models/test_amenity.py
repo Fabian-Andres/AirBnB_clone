@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""tests!"""
+"""tests for Amenity Class"""
 import unittest
 from models.amenity import Amenity
 
@@ -8,23 +8,18 @@ from models.amenity import Amenity
 class TestAmenity(unittest.TestCase):
     """Unittest"""
 
-    def test_id(self):
+    def test_id_amenity(self):
         """Test for id attribute"""
-        id_list = []
-        for i in range(100):
-            obj = Amenity()
-            self.assertTrue(obj.id not in id_list)
-            id_list.append(obj.id)
-
+        obj = Amenity()
         self.assertEqual(str(type(obj.id)), "<class 'str'>")
 
-    def test_create_at(self):
+    def test_create_at_amenity(self):
         """Test for create_at attribute"""
         obj = Amenity()
         self.assertEqual(str(type(obj.created_at)),
                          "<class 'datetime.datetime'>")
 
-    def test_update_at(self):
+    def test_update_at_amenity(self):
         """Test for updated_at attribute"""
         obj = Amenity()
         self.assertEqual(str(type(obj.updated_at)),
@@ -33,14 +28,14 @@ class TestAmenity(unittest.TestCase):
         obj.save()
         self.assertFalse(first_value == obj.updated_at)
 
-    def test_str(self):
+    def test_str_amenity(self):
         """Test for str method"""
         obj = Amenity()
         self.assertEqual(obj.__str__(),
                          "[{}] ({}) {}".format(obj.__class__.__name__,
                                                obj.id, obj.__dict__))
 
-    def test_to_dict(self):
+    def test_to_dict_amenity(self):
         """Test for dict method"""
         obj = Amenity()
         my_dict = obj.to_dict()
@@ -55,7 +50,7 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(str(type(my_dict["name"])) == "<class 'str'>")
         self.assertEqual(my_dict["name"], "Manuel")
 
-    def test_dict_to_obj(self):
+    def test_dict_to_obj_amenity(self):
         """Test for create an instance with a
         dictionary representation"""
         obj = Amenity()
