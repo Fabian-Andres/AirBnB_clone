@@ -3,66 +3,28 @@
 """tests for Place Model"""
 import unittest
 from models.place import Place
+from models.base_model import BaseModel
 
 
 class TestPlace(unittest.TestCase):
     """Unittest"""
 
-    def test_id_place(self):
-        """Test for id attribute"""
+    def test_instance_Place(self):
+        """ Test to check if sub class of Base Model """
         obj = Place()
-        self.assertEqual(str(type(obj.id)), "<class 'str'>")
+        self.assertIsInstance(obj, BaseModel)
 
-    def test_create_at_place(self):
-        """Test for create_at attribute"""
+    def test_attributes_Place(self):
+        """ Test to check the expected attributes """
         obj = Place()
-        self.assertEqual(str(type(obj.created_at)),
-                         "<class 'datetime.datetime'>")
-
-    def test_update_at_place(self):
-        """Test for updated_at attribute"""
-        obj = Place()
-        self.assertEqual(str(type(obj.updated_at)),
-                         "<class 'datetime.datetime'>")
-        first_value = obj.updated_at
-        obj.save()
-        self.assertFalse(first_value == obj.updated_at)
-
-    def test_str_place(self):
-        """Test for str method"""
-        obj = Place()
-        self.assertEqual(obj.__str__(),
-                         "[{}] ({}) {}".format(obj.__class__.__name__,
-                                               obj.id, obj.__dict__))
-
-    def test_to_dict_place(self):
-        """Test for dict method"""
-        obj = Place()
-        my_dict = obj.to_dict()
-        self.assertTrue("__class__" in my_dict)
-        self.assertTrue(str(type(my_dict["created_at"])) == "<class 'str'>")
-        self.assertTrue(str(type(my_dict["updated_at"])) == "<class 'str'>")
-        obj.name = "Manuel"
-        obj.age = 26
-        my_dict = obj.to_dict()
-        self.assertTrue(str(type(my_dict["age"])) == "<class 'int'>")
-        self.assertEqual(my_dict["age"], 26)
-        self.assertTrue(str(type(my_dict["name"])) == "<class 'str'>")
-        self.assertEqual(my_dict["name"], "Manuel")
-
-    def test_dict_to_obj_place(self):
-        """Test for create an instance with a
-        dictionary representation"""
-        obj = Place()
-        obj.name = "Manuel"
-        obj.awesome = 100
-        my_dict = obj.to_dict()
-
-        new_obj = Place(**my_dict)
-        self.assertFalse(obj is new_obj)
-        self.assertEqual(obj.id, new_obj.id)
-        self.assertEqual(obj.updated_at, new_obj.updated_at)
-        self.assertEqual(obj.name, new_obj.name)
-        self.assertEqual(obj.created_at, new_obj.created_at)
-        self.assertEqual(obj.awesome, new_obj.awesome)
-        self.assertEqual(type(obj), type(new_obj))
+        self.assertIsInstance(obj.city_id, str)
+        self.assertIsInstance(obj.user_id, str)
+        self.assertIsInstance(obj.name, str)
+        self.assertIsInstance(obj.description, str)
+        self.assertIsInstance(obj.number_rooms, int)
+        self.assertIsInstance(obj.number_bathrooms, int)
+        self.assertIsInstance(obj.max_guest, int)
+        self.assertIsInstance(obj.price_by_night, int)
+        self.assertIsInstance(obj.latitude, float)
+        self.assertIsInstance(obj.longitude, float)
+        self.assertIsInstance(obj.amenity_ids, list)
