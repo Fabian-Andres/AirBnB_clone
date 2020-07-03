@@ -44,27 +44,16 @@ class TestBase(unittest.TestCase):
         self.assertTrue(
             storage.all()[("BaseModel" + "." + str(obj.id))] == obj)
 
-    def test_save_r_file_storage(self):
-        """ Check save method"""
+    def test_save_reload_file_storage(self):
+        """ Check save / reload method"""
         obj = BaseModel()
         obj.name = "Manuel-12345"
         obj.age = 26
-        storage.save()
-        self.assertTrue(storage.all()["BaseModel" + "." + str(obj.id)])
-        self.assertTrue(
-            storage.all()["BaseModel" + "." +
-                          str(obj.id)].name == "Manuel-12345")
-        self.assertTrue(
-            storage.all()["BaseModel" + "." + str(obj.id)].age == 26)
 
-    def test_reload_file_storage(self):
-        """ Check reload method"""
-        obj = BaseModel()
-        obj.name = "Manuel-12345"
-        obj.age = 26
         storage.save()
+        FileStorage._FileStorage__objects = {}
         storage.reload()
-        self.assertTrue(storage.all()["BaseModel" + "." + str(obj.id)])
+
         self.assertTrue(
             storage.all()["BaseModel" + "." +
                           str(obj.id)].name == "Manuel-12345")
