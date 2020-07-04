@@ -13,6 +13,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 from models.state import State
+from models.engine.file_storage import FileStorage
 
 
 class TestConsole(unittest.TestCase):
@@ -127,22 +128,25 @@ class TestConsole(unittest.TestCase):
 
     def test_count_dot_format(self):
         """ Test count functionality with dot format """
+        FileStorage._FileStorage__objects = {}
+
         for elem in TestConsole.classes:
-            with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd(elem + "." + "count()")
-            num = int(f.getvalue()[:-1])
-            self.assertEqual(num, storage.count_list(elem))
             obj = globals()[elem]()
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd(elem + "." + "count()")
-            self.assertEqual(num + 1, storage.count_list(elem))
+            self.assertEqual(f.getvalue()[:-1], "1")
+
+            obj = globals()[elem]()
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(elem + "." + "count()")
+            self.assertEqual(f.getvalue()[:-1], "2")
 
         for elem in TestConsole.classes:
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("count " + elem)
-            num = int(f.getvalue()[:-1])
-            self.assertEqual(num, storage.count_list(elem))
+            self.assertEqual(f.getvalue()[:-1], "2")
+
             obj = globals()[elem]()
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("count " + elem)
-            self.assertEqual(num + 1, storage.count_list(elem))
+            self.assertEqual(f.getvalue()[:-1], "3")
