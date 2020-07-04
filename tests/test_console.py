@@ -133,12 +133,12 @@ class TestConsole(unittest.TestCase):
         for elem in TestConsole.classes:
             obj = globals()[elem]()
             with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd(elem + "." + "count()")
+                HBNBCommand().onecmd("{}.count()".format(elem))
             self.assertEqual(f.getvalue()[:-1], "1")
 
             obj = globals()[elem]()
             with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd(elem + "." + "count()")
+                HBNBCommand().onecmd("{}.count()".format(elem))
             self.assertEqual(f.getvalue()[:-1], "2")
 
         for elem in TestConsole.classes:
