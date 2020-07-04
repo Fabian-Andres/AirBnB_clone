@@ -126,6 +126,26 @@ class TestConsole(unittest.TestCase):
             self.assertTrue(f.getvalue() == "")
             self.assertEqual(obj.Name, "Manuel")
 
+    def test_update_dot_format(self):
+        """ Test update functionality with dot format """
+        for elem in TestConsole.classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                obj = globals()[elem]()
+                HBNBCommand().onecmd("{}.update({}, Name, Manuel)".format(elem, obj.id))
+            self.assertTrue(f.getvalue() == "")
+            self.assertEqual(obj.Name, "Manuel")
+
+    def test_update_dictionary_dot_format(self):
+        """ Test update functionality with dot format and a dictionary"""
+        for elem in TestConsole.classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                obj = globals()[elem]()
+                dictionary = {"Name": "Manuel", "age": 26}
+                HBNBCommand().onecmd("{}.update({}, {})".format(elem, obj.id, dictionary))
+            self.assertTrue(f.getvalue() == "")
+            self.assertEqual(obj.Name, "Manuel")
+            self.assertEqual(obj.age, 26)
+
     def test_count_dot_format(self):
         """ Test count functionality with dot format """
         FileStorage._FileStorage__objects = {}
