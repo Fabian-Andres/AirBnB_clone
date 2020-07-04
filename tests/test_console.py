@@ -61,12 +61,29 @@ class TestConsole(unittest.TestCase):
                 HBNBCommand().onecmd("show " + elem + " " + str(obj.id))
             self.assertEqual(obj.__str__(), f.getvalue()[:-1])
 
+    def test_show_dot_format(self):
+        """ Test show functionality with dot format """
+        for elem in TestConsole.classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                obj = globals()[elem]()
+                HBNBCommand().onecmd(elem + "." + "show(" + str(obj.id) + ")")
+            self.assertEqual(obj.__str__(), f.getvalue()[:-1])
+
     def test_destroy(self):
         """ Test destroy functionality """
         for elem in TestConsole.classes:
             with patch('sys.stdout', new=StringIO()) as f:
                 obj = globals()[elem]()
                 HBNBCommand().onecmd("destroy " + elem + " " + str(obj.id))
+            self.assertTrue(f.getvalue() == "")
+            self.assertNotIn(elem + "." + str(obj.id), storage.all())
+
+    def test_destroy_dot_format(self):
+        """ Test destroy functionality with dot format """
+        for elem in TestConsole.classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                obj = globals()[elem]()
+                HBNBCommand().onecmd(elem + "." + "destroy(" + str(obj.id) + ")")
             self.assertTrue(f.getvalue() == "")
             self.assertNotIn(elem + "." + str(obj.id), storage.all())
 
@@ -87,3 +104,21 @@ class TestConsole(unittest.TestCase):
         for elm in storage.all().values():
             all_elem += elm.__str__() + "\n"
         self.assertEqual(f.getvalue(), all_elem)
+
+    def test_all_dot_format(self):
+        """ Test all functionality with dot format """
+        for elem in TestConsole.classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(elem + "." + "all()")
+            some_elem = ""
+            for value in storage.all().values():
+                if value.__class__.__name__ == elem:
+                    some_elem += value.__str__() + "\n"
+            self.assertEqual(f.getvalue(), some_elem)
+
+    def test_count_dot_format(self):
+        """ Test count functionality with dot format """
+        for elem in TestConsole.classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd(elem + "." + "count()")
+            self.assertEqual(f.getvalue()[:-1], str(storage.count_list(elem)))
