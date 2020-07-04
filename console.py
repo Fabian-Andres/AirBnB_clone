@@ -169,8 +169,8 @@ class HBNBCommand(cmd.Cmd):
                 func = getattr(type(self), "do_" + str(name_func))
                 f_line = str(class_name)
                 if len(values) > 1:
-                    list_args = args.split(",", 1)
                     try:
+                        list_args = args.split(",", 1)
                         """ check if update + dictionary """
                         dict_args = list_args[1].replace("'", "\"")
                         dict_args = json.loads(dict_args)
@@ -182,6 +182,7 @@ class HBNBCommand(cmd.Cmd):
                         return
                     except:
                         pass
+                    list_args = args.split(",")
                     if len(list_args) != 0:
                         list_args[0] = list_args[0].replace('"', '')
                     for i in range(0, len(list_args)):
