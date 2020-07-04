@@ -29,9 +29,6 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("help")
         self.assertEqual(f.getvalue(), m1 + m2 + m3)
 
-    def test_EOF(self):
-        """ test EOF """
-
     def test_quit(self):
         """ Test quit / EOF functionality """
         with patch('sys.stdout', new=StringIO()) as f:
@@ -71,8 +68,7 @@ class TestConsole(unittest.TestCase):
                 obj = globals()[elem]()
                 HBNBCommand().onecmd("destroy " + elem + " " + str(obj.id))
             self.assertTrue(f.getvalue() == "")
-            self.assertNotIn(elem + "." +
-                             str(f.getvalue()[:-1]), storage.all())
+            self.assertNotIn(elem + "." + str(obj.id), storage.all())
 
     def test_all(self):
         """ Test all functionality """
@@ -83,7 +79,7 @@ class TestConsole(unittest.TestCase):
             for value in storage.all().values():
                 if value.__class__.__name__ == elem:
                     some_elem += value.__str__() + "\n"
-        self.assertEqual(f.getvalue(), some_elem)
+            self.assertEqual(f.getvalue(), some_elem)
 
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all")
