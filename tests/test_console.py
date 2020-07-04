@@ -67,7 +67,7 @@ class TestConsole(unittest.TestCase):
         for elem in TestConsole.classes:
             with patch('sys.stdout', new=StringIO()) as f:
                 obj = globals()[elem]()
-                HBNBCommand().onecmd(elem + "." + "show(" + str(obj.id) + ")")
+                HBNBCommand().onecmd("{}.show({})".format(elem, obj.id))
             self.assertEqual(obj.__str__(), f.getvalue()[:-1])
 
     def test_destroy(self):
@@ -84,7 +84,7 @@ class TestConsole(unittest.TestCase):
         for elem in TestConsole.classes:
             with patch('sys.stdout', new=StringIO()) as f:
                 obj = globals()[elem]()
-                HBNBCommand().onecmd(elem + "." + "destroy(" + str(obj.id) + ")")
+                HBNBCommand().onecmd("{}.destroy({})".format(elem, obj.id))
             self.assertTrue(f.getvalue() == "")
             self.assertNotIn(elem + "." + str(obj.id), storage.all())
 
@@ -110,7 +110,7 @@ class TestConsole(unittest.TestCase):
         """ Test all functionality with dot format """
         for elem in TestConsole.classes:
             with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd(elem + "." + "all()")
+                HBNBCommand().onecmd("{}.all()".format(elem))
             some_elem = ""
             for value in storage.all().values():
                 if value.__class__.__name__ == elem:
@@ -140,13 +140,3 @@ class TestConsole(unittest.TestCase):
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("{}.count()".format(elem))
             self.assertEqual(f.getvalue()[:-1], "2")
-
-        for elem in TestConsole.classes:
-            with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd("count " + elem)
-            self.assertEqual(f.getvalue()[:-1], "2")
-
-            obj = globals()[elem]()
-            with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd("count " + elem)
-            self.assertEqual(f.getvalue()[:-1], "3")
