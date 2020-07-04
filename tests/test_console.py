@@ -116,6 +116,15 @@ class TestConsole(unittest.TestCase):
                     some_elem += value.__str__() + "\n"
             self.assertEqual(f.getvalue(), some_elem)
 
+    def test_update(self):
+        """ Test update functionality """
+        for elem in TestConsole.classes:
+            with patch('sys.stdout', new=StringIO()) as f:
+                obj = globals()[elem]()
+                HBNBCommand().onecmd("update " + elem + " " + str(obj.id) + " Name" + " Manuel")
+            self.assertTrue(f.getvalue() == "")
+            self.assertEqual(obj.Name, "Manuel")
+
     def test_count_dot_format(self):
         """ Test count functionality with dot format """
         for elem in TestConsole.classes:
