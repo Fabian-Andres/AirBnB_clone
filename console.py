@@ -71,7 +71,9 @@ class HBNBCommand(cmd.Cmd):
         type (show <class_name(id)>) or (<class_name>.show(id))
 
         Example:
-        BaseModel.show("6075df2a-af94-4acf-a78e-26f9254a2a60")
+        (hbnb) BaseModel.show("8153f2d6-d7ca-4bd9-ad61-e892d5c560f9")
+        [BaseModel] (8153f2d6-d7ca-4bd9-ad61-e892d5c560f9) {...}
+        (hbnb)
         """
         data = line.split(" ")
         if line == "":
