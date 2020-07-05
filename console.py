@@ -37,8 +37,21 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
-        """Creates a new instance of BaseModel,
-        saves it (to the JSON file) and prints the id"""
+        """
+        Creates a new instance of 
+        (BaseModel, User, State, City, Amenity, Place or Review),
+        saves it (to the JSON file) and prints the id
+        
+        Documented commands:
+        =======================================================
+        type (create <class_name>) or (<class_name>.create())
+
+        Example:
+
+        (hbnb) BaseModel.create()
+        8153f2d6-d7ca-4bd9-ad61-e892d5c560f9
+        (hbnb)
+        """
         if line == "":
             print("** class name missing **")
         elif line in type(self).c:
