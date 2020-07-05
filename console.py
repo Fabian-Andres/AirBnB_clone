@@ -49,8 +49,17 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Prints the string representation of an
-        instance based on the class name and id"""
+        """
+        Prints the string representation of an
+        instance based on the class name and id
+
+        Documented commands:
+        =======================================================
+        type (show <class_name(id)>) or (<class_name>.show(id))
+
+        Example:
+        BaseModel.show("6075df2a-af94-4acf-a78e-26f9254a2a60")
+        """
         data = line.split(" ")
         if line == "":
             print("** class name missing **")
