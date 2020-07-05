@@ -123,6 +123,13 @@ class HBNBCommand(cmd.Cmd):
         [Place] (118f7a06-ab4f-4112-bfc4-8cdab1aefe96) {...}
         [User] (55baa4fe-3f29-4c06-90e8-9fd2539aff27) {...}
         (hbnb)
+
+        Example 2
+        * Print all classes created by the same type *:
+
+        (hbnb) BaseModel.all()
+        [BaseModel] (8153f2d6-d7ca-4bd9-ad61-e892d5c560f9) {...}
+        (hbnb)
         """
         if line == "":
             storage.print_all()
