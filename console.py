@@ -38,10 +38,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """
-        Creates a new instance of 
+        Creates a new instance of
         (BaseModel, User, State, City, Amenity, Place or Review),
         saves it (to the JSON file) and prints the id
-        
+
         Documented commands:
         =======================================================
         type (create <class_name>) or (<class_name>.create())
@@ -107,8 +107,23 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_all(self, line):
-        """Prints all string representation of all instances
-        based or not on the class name."""
+        """
+        Prints all string representation of all instances
+        based or not on the class name.
+
+        Documented commands:
+        =======================================================
+        type (all) or (<class_name>.all())
+
+        Example 1
+        * Print all classes created *:
+
+        (hbnb) all
+        [BaseModel] (8153f2d6-d7ca-4bd9-ad61-e892d5c560f9) {...}
+        [Place] (118f7a06-ab4f-4112-bfc4-8cdab1aefe96) {...}
+        [User] (55baa4fe-3f29-4c06-90e8-9fd2539aff27) {...}
+        (hbnb)
+        """
         if line == "":
             storage.print_all()
         elif line in type(self).c:
