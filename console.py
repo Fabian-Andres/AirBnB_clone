@@ -160,8 +160,26 @@ class HBNBCommand(cmd.Cmd):
             return a == b
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by adding
-        or updating attribute (save the change into the JSON file)."""
+        """
+        Updates an instance based on the class name and id by adding
+        or updating attribute (save the change into the JSON file).
+
+        Documented commands:
+        =======================================================
+        type (update <class_name(id, attribute_name, attribute_value)>)
+        or
+        (<class_name>.update(id, attribute_name, attribute_value))
+        (<class_name>.update(id, dictionary_representation))
+
+
+        Example 1
+        * Update the parameters for specific class to id *:
+
+        (hbnb) User.update("55baa4fe-3f29-4c06-90e8-...", "first_name", "John")
+        (hbnb) User.show("55baa4fe-3f29-4c06-90e8-...")
+        [User] (55baa4fe-3f29-4c06-90e8-...) {'first_name,': 'John', ...}
+        (hbnb)
+        """
         data = shlex.split(line)
         if line == "":
             print("** class name missing **")
