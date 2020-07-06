@@ -37,8 +37,21 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
-        """Creates a new instance of BaseModel,
-        saves it (to the JSON file) and prints the id"""
+        """
+        Creates a new instance of
+        (BaseModel, User, State, City, Amenity, Place or Review),
+        saves it (to the JSON file) and prints the id
+
+        Documented commands:
+        =======================================================
+        type (create <class_name>) or (<class_name>.create())
+
+        Example:
+
+        (hbnb) BaseModel.create()
+        8153f2d6-d7ca-4bd9-ad61-e892d5c560f9
+        (hbnb)
+        """
         if line == "":
             print("** class name missing **")
         elif line in type(self).c:
@@ -49,8 +62,19 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Prints the string representation of an
-        instance based on the class name and id"""
+        """
+        Prints the string representation of an
+        instance based on the class name and id
+
+        Documented commands:
+        =======================================================
+        type (show <class_name(id)>) or (<class_name>.show(id))
+
+        Example:
+        (hbnb) BaseModel.show("8153f2d6-d7ca-4bd9-ad61-e892d5c560f9")
+        [BaseModel] (8153f2d6-d7ca-4bd9-ad61-e892d5c560f9) {...}
+        (hbnb)
+        """
         data = line.split(" ")
         if line == "":
             print("** class name missing **")
@@ -66,8 +90,20 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id
-        (save the change into the JSON file). """
+        """
+        Deletes an instance based on the class name and id
+        (save the change into the JSON file).
+
+        Documented commands:
+        =======================================================
+        type (destroy <class_name(id)>) or (<class_name>.destroy(id))
+
+        Example:
+        (hbnb) BaseModel.destroy("8153f2d6-d7ca-4bd9-ad61-e892d5c560f9")
+        (hbnb) BaseModel.show("8153f2d6-d7ca-4bd9-ad61-e892d5c560f9")
+        ** no instance found **
+        (hbnb)
+        """
         data = line.split(" ")
         if line == "":
             print("** class name missing **")
@@ -83,8 +119,30 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_all(self, line):
-        """Prints all string representation of all instances
-        based or not on the class name."""
+        """
+        Prints all string representation of all instances
+        based or not on the class name.
+
+        Documented commands:
+        =======================================================
+        type (all) or (<class_name>.all())
+
+        Example 1
+        * Print all classes created *:
+
+        (hbnb) all
+        [BaseModel] (8153f2d6-d7ca-4bd9-ad61-e892d5c560f9) {...}
+        [Place] (118f7a06-ab4f-4112-bfc4-8cdab1aefe96) {...}
+        [User] (55baa4fe-3f29-4c06-90e8-9fd2539aff27) {...}
+        (hbnb)
+
+        Example 2
+        * Print all classes created by the same type *:
+
+        (hbnb) BaseModel.all()
+        [BaseModel] (8153f2d6-d7ca-4bd9-ad61-e892d5c560f9) {...}
+        (hbnb)
+        """
         if line == "":
             storage.print_all()
         elif line in type(self).c:
@@ -114,8 +172,36 @@ class HBNBCommand(cmd.Cmd):
             return a == b
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by adding
-        or updating attribute (save the change into the JSON file)."""
+        """
+        Updates an instance based on the class name and id by adding
+        or updating attribute (save the change into the JSON file).
+
+        Documented commands:
+        =======================================================
+        type (update <class_name(id, attribute_name, attribute_value)>)
+        or
+        (<class_name>.update(id, attribute_name, attribute_value))
+        (<class_name>.update(id, dictionary_representation))
+
+
+        Example 1
+        * Update the parameters for specific class to id *:
+
+        (hbnb) User.update("55baa4fe-3f29-4c06-90e8-...", "first_name", "John")
+        (hbnb) User.show("55baa4fe-3f29-4c06-90e8-...")
+        [User] (55baa4fe-3f29-4c06-90e8-...) {'first_name,': 'John', ...}
+        (hbnb)
+
+        Example 2
+        * Update the parameters from dictionary for a specific class to id *:
+
+        (hbnb) User.show("55baa4fe-...")
+        [User] (55baa4fe-...) {'first_name,': 'John', ...}
+        (hbnb) User.update("55baa4fe-...", {'first_name': "Bob", "age": 89})
+        (hbnb) User.show("55baa4fe-...")
+        [User] (55baa4fe-...) {'first_name,': 'Bob', 'age': 89, ...}
+        (hbnb)
+        """
         data = shlex.split(line)
         if line == "":
             print("** class name missing **")

@@ -1,6 +1,6 @@
-# AirBnB clone project
+# AirBnB clone project - The console
 
-This is a clone project for [Airbnb](https://www.airbnb.com/ "Airbnb") website 
+**The console** is the base for able to manage the objects of our project, and the base of [Airbnb](https://www.airbnb.com/ "Airbnb") clone project. 
 
 ### System requirements
 
