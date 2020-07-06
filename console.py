@@ -90,8 +90,20 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id
-        (save the change into the JSON file). """
+        """
+        Deletes an instance based on the class name and id
+        (save the change into the JSON file).
+
+        Documented commands:
+        =======================================================
+        type (destroy <class_name(id)>) or (<class_name>.destroy(id))
+
+        Example:
+        (hbnb) BaseModel.destroy("8153f2d6-d7ca-4bd9-ad61-e892d5c560f9")
+        (hbnb) BaseModel.show("8153f2d6-d7ca-4bd9-ad61-e892d5c560f9")
+        ** no instance found **
+        (hbnb)
+        """
         data = line.split(" ")
         if line == "":
             print("** class name missing **")
