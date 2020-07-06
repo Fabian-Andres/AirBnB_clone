@@ -179,6 +179,16 @@ class HBNBCommand(cmd.Cmd):
         (hbnb) User.show("55baa4fe-3f29-4c06-90e8-...")
         [User] (55baa4fe-3f29-4c06-90e8-...) {'first_name,': 'John', ...}
         (hbnb)
+
+        Example 2
+        * Update the parameters from dictionary for a specific class to id *:
+
+        (hbnb) User.show("55baa4fe-...")
+        [User] (55baa4fe-...) {'first_name,': 'John', ...}
+        (hbnb) User.update("55baa4fe-...", {'first_name': "Bob", "age": 89})
+        (hbnb) User.show("55baa4fe-...")
+        [User] (55baa4fe-...) {'first_name,': 'Bob', 'age': 89, ...}
+        (hbnb)
         """
         data = shlex.split(line)
         if line == "":
