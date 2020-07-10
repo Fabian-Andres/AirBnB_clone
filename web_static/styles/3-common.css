@@ -1,0 +1,14 @@
+/*
+| Styles for body section 
+*/
+body {
+    display: grid;
+    grid-template-rows: 70px 1fr 60px;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    color: #484848;
+    font-size: 14px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}

@@ -1,0 +1,9 @@
+/*
+| Styles for footer section 
+*/
+footer {
+    background-color: #00FF00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
