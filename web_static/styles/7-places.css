@@ -1,0 +1,26 @@
+/*
+| Styles for places section 
+*/
+
+.places {
+    margin:40px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.places h1 {
+    font-size: 30px;
+    margin: 0 0 10px;
+    width: 100%;
+}
+.places article {
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px;
+    width: 390px; 
+    box-sizing: border-box;
+}
+.places article h2{
+    text-align: center;
+}
