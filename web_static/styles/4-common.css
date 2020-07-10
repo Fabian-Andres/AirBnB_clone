@@ -1,0 +1,47 @@
+/*
+| Styles for body section 
+*/
+body {
+    display: grid;
+    grid-template-rows: 70px 1fr 60px;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    color: #484848;
+    font-size: 14px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.container {
+    margin: 30px auto;
+    width: 95%;
+    max-width: 1000px;
+    padding: 0 30px;
+}
+.filters {
+    background-color: #fff;
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 30px;
+}
+.btn {
+    font-size: 18px;
+    background-color: #FF5A5F;
+    color: #FFFFFF;
+    height: 48px;
+    width: 20%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+.btn:hover,
+.btn:active,
+.btn:focus {
+    opacity: 90%;
+}
