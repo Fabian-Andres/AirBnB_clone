@@ -1,6 +1,10 @@
 /*
 | Styles for body section 
 */
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: grid;
     grid-template-rows: 70px 1fr 60px;
